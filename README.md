@@ -1,0 +1,1 @@
+This is a library exercise, part of the Odin Project javascript course.
