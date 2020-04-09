@@ -5,3 +5,11 @@ html,body {
 * {
 	font-family: Graphik Regular;
 }
+
+ul {
+	list-style-type: none;
+}
+
+table {
+	text-align: left;
+}
