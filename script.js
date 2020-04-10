@@ -5,49 +5,31 @@ function Book(title,author,pages,read) {
 	this.author = author
 	this.pages = pages
 	this.read = read
-	this.info = `${this.title} by ${this.author}, ${this.pages} pages, ${this.read}`
-
 	myLibrary.push(this)
-
-	console.log(this)
-}
-
-Book.prototype.sayName = function() {
-	console.log(this)
 }
 
 function addBookToLibrary() {
 
 }
 
-book1 = new Book("Dick tales 2","Richard Hawkins",200,"No")
+let table = document.querySelector(".table");
 
-myrender = "<p>Hello there<p>"
+book1 = new Book("Dick tales 2, bigger","Richard Hawkins",2500,"No")
+book2 = new Book("Dick tales 3, the revenge","Richard Hawkins",300,"No")
+book3 = new Book("Dick tales 4, coming up","Richard Hawkins",210,"No")
+
+myLibrary.forEach(function(e) {
+	table.innerHTML += `<tr><td>${e.title}</td>
+							<td>${e.author}</td>
+							<td>${e.pages}</td>
+							<td>${e.read}</td>
+						</tr>
+						`
+});
 
 
 // Selector
-const world = document.querySelector(".world");
 
 // HTML Template
-const html = `<table style="width:100%">
-			<tr>
-				<th>Title</th>
-				<th>Author</th>
-				<th>Pages</th>
-				<th>Read</th>
-			</tr>
-			<tr>
-				<td>${book1.title}</td>
-				<td>${book1.author}</td>
-				<td>${book1.pages}</td>
-				<td>${book1.read}</td>
-			</ul>
-			`
-
 
 // Render function
-function render(template,selector) {
-	world.innerHTML = html;
-}
-
-render()
