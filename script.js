@@ -5,30 +5,58 @@ function Book(title,author,pages,read) {
 	this.author = author
 	this.pages = pages
 	this.read = read
-	myLibrary.push(this)
 }
 
-function addBookToLibrary() {
-
+function addtoLibrary(title,author,pages,read) {
+	let book = new Book(title,author,pages,read)
+	myLibrary.push(book)
+	generatetable(book)
 }
+
 
 let table = document.querySelector(".table");
 
-book1 = new Book("Dick tales 2, bigger","Richard Hawkins",2500,"No")
-book2 = new Book("Dick tales 3, the revenge","Richard Hawkins",300,"No")
-book3 = new Book("Dick tales 4, coming up","Richard Hawkins",210,"No")
+let book1 = addtoLibrary("Dick tales 2, bigger","Richard Hawkins",2500,"No")
+let book2 = addtoLibrary("Dick tales 3, the revenge","Richard Hawkins",300,"No")
+let book3 = addtoLibrary("Dick tales 4, coming up","Richard Hawkins",210,"No")
 
-myLibrary.forEach(function(e) {
+function generatetable(e) {
 	table.innerHTML += `<tr><td>${e.title}</td>
 							<td>${e.author}</td>
 							<td>${e.pages}</td>
 							<td>${e.read}</td>
 						</tr>
 						`
-});
+}
 
 
-// Selector
+
+//Button actions
+function addBook() {
+	alert("Working")
+}
+
+
+// Selectors
+let add = document.querySelector("#add")
+let submit = document.querySelector("#submit")
+
+
+function checkForm(e) {
+  e.preventDefault(); // prevent the form from being submitted
+  let name = document.querySelector('input[name="title"]').value
+  let author = document.querySelector('input[name="author"]').value
+  let pages = document.querySelector('input[name="pages"]').value
+  let read = document.querySelector('input[name="read"]').checked
+  addtoLibrary(name, author, pages, read)
+  alert("works")
+
+}
+
+submit.addEventListener("click", checkForm);
+
+// add.addEventListener("click",addBook)
+
 
 // HTML Template
 
