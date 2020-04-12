@@ -1,5 +1,12 @@
 let myLibrary = []
 
+// Selectors
+let add = document.querySelector("#add")
+let submit = document.querySelector("#submit")
+let popupWindow = document.querySelector(".pop-container")
+let table = document.querySelector(".table");
+let delbutton = []
+
 
 // Book creator
 function Book(title,author,pages,read) {
@@ -9,12 +16,27 @@ function Book(title,author,pages,read) {
 	this.read = read
 }
 
+function addIndex() {
+	i = 0
+	myLibrary.map(function(e,){
+		e['id'] = i
+		i++
+	})
+
+}
+
+// Button Generator 
+
+let newButton = document.createElement("button")
 
 // Add to library array + table
 function addtoLibrary(title,author,pages,read) {
 	let book = new Book(title,author,pages,read)
 	myLibrary.push(book)
-	generatetable(book)
+	addIndex()
+	generateTable(book)
+	delbutton = document.querySelectorAll('button[id="delete"]')
+	delbutton.forEach(e => e.addEventListener("click",deleteBook));
 }
 
 
@@ -26,29 +48,45 @@ let book3 = addtoLibrary("Dick tales 4, coming up","Richard Hawkins",210,"No")
 
 // Table generator
 
-function generatetable(e) {
-	table.innerHTML += `<tr><td>${e.title}</td>
-							<td>${e.author}</td>
-							<td>${e.pages}</td>
-							<td>${e.read}</td>
-						</tr>
-						`
+
+
+function generateTable(arr) {
+
+	let row = document.createElement("tr")
+
+
+	for (var key in arr) {
+		let rowData = document.createElement("td")
+
+		obj = arr[key]
+		rowData.innerHTML = obj
+		row.appendChild(rowData)
+
+		table.appendChild(row)
+	}
+
 }
+
+
+
+// function generatetable(e) {
+// 	table.innerHTML += `<tr data-attribute="${e.id}"><td>${e.title}</td>
+// 							<td>${e.author}</td>
+// 							<td>${e.pages}</td>
+// 							<td>${e.read}</td>
+// 							<td></td>
+// 						</tr>
+// 						`
+// }
 
 
 
 //Button actions
-function addBook() {
-	alert("Working")
+
+function deleteBook(btn) {
+	let row = btn.parentNode;
+	alert(btn)
 }
-
-
-// Selectors
-let add = document.querySelector("#add")
-let submit = document.querySelector("#submit")
-let popupWindow = document.querySelector(".pop-container")
-let table = document.querySelector(".table");
-
 
 // Add new book actions
 
@@ -65,7 +103,7 @@ function checkForm(e) {
   let author = document.querySelector('input[name="author"]').value
   let pages = document.querySelector('input[name="pages"]').value
   let read = document.querySelector('input[name="read"]').checked
-  addtoLibrary(name, author, pages, read)
+  addtoLibrary(name, author, pages, read) 
 
 
 }
@@ -75,3 +113,4 @@ function checkForm(e) {
 
 add.addEventListener("click", popup)
 submit.addEventListener("click", checkForm);
+
