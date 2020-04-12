@@ -40,19 +40,31 @@ function addBook() {
 // Selectors
 let add = document.querySelector("#add")
 let submit = document.querySelector("#submit")
+let popupWindow = document.querySelector(".pop-container")
+
+// Add new book actions
+
+function popup() {
+	popupWindow.style.visibility = "visible";
+}
 
 
+// Submit actions
 function checkForm(e) {
   e.preventDefault(); // prevent the form from being submitted
+  popupWindow.style.visibility = "hidden";
   let name = document.querySelector('input[name="title"]').value
   let author = document.querySelector('input[name="author"]').value
   let pages = document.querySelector('input[name="pages"]').value
   let read = document.querySelector('input[name="read"]').checked
   addtoLibrary(name, author, pages, read)
-  alert("works")
+
 
 }
 
+//Event Listeners
+
+add.addEventListener("click", popup)
 submit.addEventListener("click", checkForm);
 
 // add.addEventListener("click",addBook)
