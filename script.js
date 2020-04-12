@@ -1,5 +1,7 @@
 let myLibrary = []
 
+
+// Book creator
 function Book(title,author,pages,read) {
 	this.title = title
 	this.author = author
@@ -7,6 +9,8 @@ function Book(title,author,pages,read) {
 	this.read = read
 }
 
+
+// Add to library array + table
 function addtoLibrary(title,author,pages,read) {
 	let book = new Book(title,author,pages,read)
 	myLibrary.push(book)
@@ -14,11 +18,13 @@ function addtoLibrary(title,author,pages,read) {
 }
 
 
-let table = document.querySelector(".table");
+// Demo books
 
 let book1 = addtoLibrary("Dick tales 2, bigger","Richard Hawkins",2500,"No")
 let book2 = addtoLibrary("Dick tales 3, the revenge","Richard Hawkins",300,"No")
 let book3 = addtoLibrary("Dick tales 4, coming up","Richard Hawkins",210,"No")
+
+// Table generator
 
 function generatetable(e) {
 	table.innerHTML += `<tr><td>${e.title}</td>
@@ -41,6 +47,8 @@ function addBook() {
 let add = document.querySelector("#add")
 let submit = document.querySelector("#submit")
 let popupWindow = document.querySelector(".pop-container")
+let table = document.querySelector(".table");
+
 
 // Add new book actions
 
@@ -62,14 +70,8 @@ function checkForm(e) {
 
 }
 
+
 //Event Listeners
 
 add.addEventListener("click", popup)
 submit.addEventListener("click", checkForm);
-
-// add.addEventListener("click",addBook)
-
-
-// HTML Template
-
-// Render function
