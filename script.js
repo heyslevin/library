@@ -5,13 +5,18 @@ let add = document.querySelector("#add")
 let submit = document.querySelector("#submit")
 let popupWindow = document.querySelector(".pop-container")
 let table = document.querySelector(".table");
+let checker = document.querySelector("#checker")
 
 // Book creator
 function Book(title,author,pages,read) {
 	this.title = title
 	this.author = author
 	this.pages = pages
-	this.read = read
+	if (checker.checked == true) {
+		this.status = true
+	} else {
+		this.status = false
+	}
 }
 
 function addIndex() {
@@ -25,7 +30,9 @@ function addIndex() {
 
 // Button Generator 
 
-function buttonGenerator(row,id) {
+	// Delete Button
+
+function buttonGenerator(row, id) {
 
 	let rowId = id
 	let buttonCell = document.createElement("td")
@@ -37,10 +44,43 @@ function buttonGenerator(row,id) {
 
 	buttonCell.appendChild(newButton)
 	row.appendChild(buttonCell)
+
+}	
+
+
+
+	// Read Button
+
+function buttonGeneratorRead(row, status) {
+
+	let buttonCell = document.createElement("td")
+	let newButton = document.createElement("button")
+	newButton.setAttribute("id","reader");
+
+	newButton.addEventListener("click",function() {
+		if (status == true) {
+			status = false;
+		} else if (status == false) {
+			status = true;
+		} 
+		buttonStatus(status, newButton);
+	})
+
+	buttonStatus(status, newButton);
+	buttonCell.appendChild(newButton)
+	row.appendChild(buttonCell)
+}
+
+function buttonStatus(status, newButton) {
+		if (status == true) {
+			newButton.innerHTML = "Read"
+		} else if (status == false) {
+			newButton.innerHTML = "Not Read"
+		}
 }
 
 
-// Add to library array + table
+// Add to library array + table **********************
 function addtoLibrary(title,author,pages,read) {
 	let book = new Book(title,author,pages,read)
 	myLibrary.push(book)
@@ -66,23 +106,26 @@ function generateTable(arr) {
 
 	arr.forEach(function(e) { 
 
-	let row = document.createElement("tr")
+		let row = document.createElement("tr")
 
+			
+			for (var key in e) {
+				let rowData = document.createElement("td")
+				obj = e[key]
+				rowData.innerHTML = obj
+				row.appendChild(rowData)
+				table.appendChild(row)
+			}
 		
-		for (var key in e) {
-			let rowData = document.createElement("td")
 
-			obj = e[key]
-			rowData.innerHTML = obj
-			row.appendChild(rowData)
-			table.appendChild(row)
-		}
-	
+		addIndex()
+		let rowId = e['id']
+		let status = e['status']
 
-	addIndex()
-	let rowId = e['id']
-	row.setAttribute("id",arr['id'])
-	buttonGenerator(row,rowId)
+		row.setAttribute("id",rowId)
+		buttonGenerator(row, rowId)
+		buttonGeneratorRead(row, status)
+
 
 	});
 
@@ -104,11 +147,15 @@ function deleteBook(arr) {
 	generateTable(myLibrary)
 }
 
+
+
 // Add new book actions
 
 function popup() {
 	popupWindow.style.visibility = "visible";
 }
+
+// Read Toggle
 
 
 // Submit actions
