@@ -12,11 +12,12 @@
 
 		<div class="pop-container">
 			<form id="bookquery">
-				<input type="text" name="title" id="title" placeholder="Title"></br>
-				<input type="text" name="author" placeholder="Author"></br>
-				<input type="text" name="pages" placeholder="Pages"></br>
+				<input required type="text" name="title" id="title" placeholder="Title"></br>
+				<input required type="text" name="author" placeholder="Author"></br>
+				<input required type="number" name="pages" placeholder="Pages"></br>
 				<p>Have you read it?<input id="checker" type="checkbox" placeholder="Title" name="read"></p></br>
 				<button id="submit">Submit</button>
+				<p id="message"></p>
 			</form>
 		</div>
 
