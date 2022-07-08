@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/memellaguno/library#readme",
   "dependencies": {
-    "moment": "^2.27.0"
+    "moment": "^2.29.4"
   },
   "devDependencies": {
     "webpack-cli": "^3.3.12"
